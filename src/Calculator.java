@@ -55,17 +55,17 @@ public class Calculator implements ActionListener{
         }
 
         functionButtons = new JButton[9];
-        addButton = new JButton("+");
-        subButton = new JButton("-");
-        mulButton = new JButton("\u00d7");
-        divButton = new JButton("\u00F7");
+        addButton = new JButton("+"); // addition (сложение)
+        subButton = new JButton("-"); // subtraction (вычитание)
+        mulButton = new JButton("\u00d7"); // multiplication (умножение)
+        divButton = new JButton("\u00F7"); // division (деление)
         equButton = new JButton("=");
         delButton = new JButton("\u232B");
         clrButton = new JButton("Clear");
         negButton = new JButton("\u00B1");
         decButton = new JButton(".");
 
-        functionButtons[0] = addButton;
+        functionButtons[0] = addButton; // inscriptions on buttons
         functionButtons[1] = subButton;
         functionButtons[2] = mulButton;
         functionButtons[3] = divButton;
@@ -85,7 +85,7 @@ public class Calculator implements ActionListener{
             panel.setBounds(50, 100, 300, 300);
             panel.setLayout(new GridLayout(4, 4, 10, 10));
 
-            panel.add(numberButtons[1]);
+            panel.add(numberButtons[1]); // add buttons to panel
             panel.add(numberButtons[2]);
             panel.add(numberButtons[3]);
             panel.add(addButton);
@@ -119,7 +119,7 @@ public class Calculator implements ActionListener{
         Calculator calculator = new Calculator();
         }
 
-    @Override // buttons 1-9
+    @Override // Override buttons 1-9
     public void actionPerformed(ActionEvent e) {
         for(int i = 0; i<10; i++) {
             if (e.getSource() == numberButtons[i]) {
@@ -148,14 +148,49 @@ public class Calculator implements ActionListener{
             textField.setText("");
         }
 
+        if (e.getSource() == subButton){
+            num1 = Double.parseDouble(textField.getText());
+            operator = '-';
+            textField.setText("");
+        }
+
+        if (e.getSource() == mulButton){
+            num1 = Double.parseDouble(textField.getText());
+            operator = '*';
+            textField.setText("");
+        }
+
+        if (e.getSource() == divButton){
+            num1 = Double.parseDouble(textField.getText());
+            operator = '/';
+            textField.setText("");
+        }
+
         if (e.getSource() == equButton){
             num2 = Double.parseDouble(textField.getText());
             switch (operator){
                 case '+': result = num1 + num2; break;
+                case '-': result = num1 - num2; break;
+                case '*': result = num1 * num2; break;
+                case '/': result = num1 / num2; break;
+                // case - case * case /
             }
             textField.setText(String.valueOf(result));
 //            num1 = result;
         }
 
+
+
+
+        if (e.getSource() == clrButton){
+            textField.setText("");
+        }
+
+        if (e.getSource() == delButton && textField.getText().length() != 0){
+            String temp = textField.getText().substring(0, textField.getText().length() -1);
+            textField.setText(temp);
+        }
     }
 }
+
+// next: subButton, mulButton
